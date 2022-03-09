@@ -56,9 +56,31 @@ socket.connect()
 // Now that you are connected, you can join channels with a topic.
 // Let's assume you have a channel with a topic named `room` and the
 // subtopic is its id - in this case 42:
-let channel = socket.channel("ping", {})
+let channel = socket.channel("ping:", {})
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 export default socket
+
+// adding an authenticated socket connection
+const authSocket = new Socket("/auth_socket", {
+   params: {token: window.authToken }
+   })
+
+authSocket.onOpen(() => console.log('authSocket connected'))
+authSocket.connect()
+
+const recurringChannel = authSocket.channel("recurring")
+
+recurringChannel.on("new_token", (payload) => {
+    console.log("received new auth token", payload)})
+
+recurringChannel.join()
+
+const dupeChannel = socket.channel("dupe")
+dupeChannel.on("number", (payload) => {
+    console.log("new number received", payload)})
+
+
+dupeChannel.join()

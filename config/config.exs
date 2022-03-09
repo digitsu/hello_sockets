@@ -12,7 +12,8 @@ config :hello_sockets, HelloSocketsWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: HelloSocketsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: HelloSockets.PubSub,
-  live_view: [signing_salt: "krA+9UIL"]
+  live_view: [signing_salt: "krA+9UIL"],
+  secret_key_base: "7SJI1MLVWfyKzScP2SDy7uKQ3qflawF2Fz9NudmOQj2SK5OSDooPegQkgWK4eiL1"
 
 # Configure esbuild (the version is required)
 config :esbuild,

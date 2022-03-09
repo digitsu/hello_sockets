@@ -13,8 +13,12 @@ defmodule HelloSocketsWeb.Endpoint do
   # socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   socket "/socket", HelloSocketsWeb.UserSocket,
-         websocket: true,
-         longpoll: false
+    websocket: true,
+    longpoll: false
+
+  socket "/auth_socket", HelloSocketsWeb.AuthSocket,
+    websocket: true,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
